@@ -1,15 +1,19 @@
 import { makeAutoObservable, runInAction } from "mobx";
+import sample from "07-shared/lib/data.json";
+import {sleep} from "07-shared/api/instance";
 
-import { createContext } from "react";
-import sample from "./data.json";
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 export interface Location {
   locationID: number;
   name: string;
+}
+
+export interface TestLocation extends Location {
+  id: string;
+  location: string;
+  env: string;
+  servers: string[];
+  hint: string;
 }
 
 export interface Env {
@@ -24,19 +28,22 @@ export interface Server {
   envID: number;
 }
 
-export class Store {
-  isLoaded = false;
+export class SliceLocation {
+  isLoading = false;
   locations: Location[] = [];
   envs: Env[] = [];
   servers: Server[] = [];
+  testLocations: TestLocation[] =[];
 
-  fetchData = async () => {
-    await sleep(3000);
+  async  fetchData  ()  {
+    this.isLoading = true;
+    await sleep(30000);
+    console.log(sample)
     runInAction(() => {
       this.locations = sample.locations;
       this.envs = sample.envs;
       this.servers = sample.servers;
-      this.isLoaded = true;
+      this.isLoading = false;
     });
   };
 
@@ -45,5 +52,5 @@ export class Store {
   }
 }
 
-export const store = new Store();
-export const storeContext = createContext(store);
+export const sliceLocation = new SliceLocation();
+
