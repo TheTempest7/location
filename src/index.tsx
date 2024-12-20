@@ -1,6 +1,7 @@
-import React, {createContext} from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import "./index.scss";
 import RootStore from  "01-app/store/rootStore"
 import App from "01-app/App";
 import {RootStoreContext} from "07-shared/lib/hooks/useStore";
