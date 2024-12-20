@@ -1,4 +1,4 @@
-import  {ReactNode} from "react";
+import {memo, ReactNode} from "react";
 
 
 interface IButton {
@@ -6,10 +6,10 @@ interface IButton {
     onClick: () => void;
 }
 
-export const Button = ({children, onClick}:IButton) => {
+export const Button = memo(({children, onClick}:IButton) => {
     return (<button
         onClick={onClick}
     >
         {children}
     </button>)
-}
+})

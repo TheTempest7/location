@@ -7,14 +7,13 @@ import {Loader} from "../07-shared/ui/Loader/Loader";
 
 import s from './App.module.scss';
 
-
 const App= observer( () => {
 
     const {sliceLocation} = useStore();
 
     useEffect(()=>{
         sliceLocation.fetchData();
-    },[])
+    },[sliceLocation])
 
   return (
     <div className={s.wrapper}>

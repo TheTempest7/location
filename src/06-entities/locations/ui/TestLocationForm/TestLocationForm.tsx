@@ -1,26 +1,29 @@
-import {ChangeEvent} from "react";
+import {ChangeEvent, memo, useCallback, useMemo} from "react";
 
 import { SelectComponent} from "07-shared/ui/Select/SelectComponent";
-import {useStore} from "07-shared/lib/hooks/useStore";
 import {CommentComponent} from "07-shared/ui/CommentComponent/CommentComponent";
 import {ISelectNewValue} from "07-shared/types/common";
 
 import s from './TestLocationForm.module.scss';
 import {convertDataToSelect} from "../../lib/utils";
-import {Env, Location, TestLocation} from "../../model/types/types";
+import {Env, IChangeTestLocationData, Location, TestLocation} from "../../model/types/types";
+
 
 
 interface ITestLocationFormProps {
     locationData: TestLocation;
     locations: Location[];
     envs: Env[];
+    changeTestLocation: (val: IChangeTestLocationData) => void;
+    deleteTestLocation: (val: string) => void;
 }
 
-export const TestLocationForm = ({locationData, locations, envs}: ITestLocationFormProps) => {
-    const {sliceLocation} = useStore();
+export const TestLocationForm = memo(
+    ({locationData, locations, envs, changeTestLocation, deleteTestLocation}: ITestLocationFormProps) => {
+        console.log('TestLocationForm')
 
-    const onSelectChangeHandler = (val:ISelectNewValue) => {
-        sliceLocation.changeTestLocationData({
+    const onSelectChangeHandler = useCallback( (val:ISelectNewValue) => {
+        changeTestLocation({
             id:   locationData.id,
             property: val.id,
             value: {
@@ -28,19 +31,28 @@ export const TestLocationForm = ({locationData, locations, envs}: ITestLocationF
                 value:val.value
             }
         })
-    }
+    },[changeTestLocation, locationData.id])
 
-    const onCommentChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
-        sliceLocation.changeTestLocationData({
+    const onCommentChangeHandler = useCallback( (e:ChangeEvent<HTMLInputElement>) => {
+        changeTestLocation({
             id: locationData.id,
             property: 'hint',
             value: e.target.value
         })
-    }
+    },[changeTestLocation, locationData.id])
 
     const onDeleteHandler = () => {
-        sliceLocation.deleteTestLocation(locationData.id);
+        deleteTestLocation(locationData.id);
     }
+
+    const locationSelectItems = useMemo(
+        () => convertDataToSelect(locations,'locationID')
+        ,[locations]);
+
+    const envSelectItems = useMemo(
+        () => convertDataToSelect(envs,'envID')
+        ,[envs])
+
 
     return <div className={s.wrapper}>
         <div className={s.header}>
@@ -55,7 +67,7 @@ export const TestLocationForm = ({locationData, locations, envs}: ITestLocationF
         <div className={s.content}>
             <SelectComponent
                 value={locationData.location}
-                items={convertDataToSelect(locations,'locationID')}
+                items={locationSelectItems}
                 onChange={onSelectChangeHandler}
                 id={'location'}
                 inscription={'Локация'}
@@ -63,7 +75,7 @@ export const TestLocationForm = ({locationData, locations, envs}: ITestLocationF
             />
             <SelectComponent
                 value={locationData.env}
-                items={convertDataToSelect(envs,'envID')}
+                items={envSelectItems}
                 onChange={onSelectChangeHandler}
                 id={'env'}
                 inscription={'Среда'}
@@ -83,4 +95,4 @@ export const TestLocationForm = ({locationData, locations, envs}: ITestLocationF
             />
         </div>
     </div>;
-};
+});

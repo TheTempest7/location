@@ -1,5 +1,5 @@
 import {Input} from "@mui/material";
-import {ChangeEvent} from "react";
+import {ChangeEvent, memo} from "react";
 
 import s from './CommentComponent.module.scss';
 
@@ -10,7 +10,8 @@ interface ICommentComponent {
     className?: string;
 }
 
-export const CommentComponent = ({value, onChange, className = ''}:ICommentComponent) => {
+export const CommentComponent = memo( ({value, onChange, className = ''}:ICommentComponent) => {
+
     return (<div className={s.wrapper + ' ' + className }>
         <span>Подсказка</span>
         <Input
@@ -21,4 +22,5 @@ export const CommentComponent = ({value, onChange, className = ''}:ICommentCompo
             startAdornment={<i className="fa-solid fa-question"></i>}
         />
     </div>)
-}
+})
+

@@ -1,4 +1,4 @@
-import  {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import {MenuItem, Select} from "@mui/material";
 import {ISelectItem} from "07-shared/types/common";
 import {convertSelectData} from "./lib/utils";
@@ -8,7 +8,8 @@ import s from './SelectComponent.module.scss';
 
 
 
-export const SelectComponent = ({value,items, onChange, id, inscription ,className = ''}: ISelectComponent) => {
+export const SelectComponent = memo(
+    ({value,items, onChange, id, inscription ,className = ''}: ISelectComponent) => {
     const [currentVal, setCurrentValue] = useState(value);
 
     useEffect(() => {
@@ -35,6 +36,6 @@ export const SelectComponent = ({value,items, onChange, id, inscription ,classNa
         })}
             </Select>
         </div>)
-}
+})
 
 console.warn = () => {};
