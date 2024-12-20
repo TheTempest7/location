@@ -1,7 +1,10 @@
 import {Button} from "07-shared/ui/Button/Button";
 import {useStore} from "07-shared/lib/hooks/useStore";
+import {memo} from "react";
 
-export const SendTestLocationData = () => {
+import s from './SendTestLocationData.module.scss';
+
+export const SendTestLocationData = memo( () => {
 
     const {sliceLocation} = useStore();
 
@@ -9,7 +12,8 @@ export const SendTestLocationData = () => {
         sliceLocation.submitTestData()
     }
 
-    return (<div>
+    return (<div className={s.wrapper}>
         <Button onClick={sendDataHandler}> Вывести результат в консоль </Button>
     </div>)
-}
+})
+

@@ -1,7 +1,10 @@
 import {Button} from "07-shared/ui/Button/Button";
 import {useStore} from "07-shared/lib/hooks/useStore";
+import {memo} from "react";
 
-export const AddTestLocation = () => {
+import s from './AddTestLocation.module.scss';
+
+export const AddTestLocation =memo( () => {
 
     const {sliceLocation} = useStore()
 
@@ -9,9 +12,10 @@ export const AddTestLocation = () => {
         sliceLocation.addTestLocation()
     }
 
-    return (<div>
+    return (<div className={s.wrapper}>
         <Button onClick={addTestLocationHandler}>
             Добавить тестовую локацию
         </Button>
     </div>)
-}
+})
+
