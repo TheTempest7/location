@@ -1,0 +1,63 @@
+.wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+  padding:  20px 40px;
+  border: 2px  solid grey;
+  background-color: #92ace7;
+
+  &:hover {
+    border-color: navy;
+  }
+
+:global {
+  .fa-trash-can {
+    cursor: pointer;
+    color: red;
+  }
+  .fa-vial {
+    font-size: 30px;
+  }
+}
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  h5 {
+    margin: 0;
+    flex: 1 1 100%;
+    font-size: 28px;
+    span {
+      margin-left: 10px;
+    }
+  }
+}
+
+.trashWrapper {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.serversWrapper {
+  :global {
+  .fa-server {
+    margin: 0 5px 0 15px;
+  }
+}
+  padding-right: 25px;
+}
+
+.select {
+  flex: 1 1 30%;
+}
+
+.hint {
+  flex: 1 0 100%;
+}

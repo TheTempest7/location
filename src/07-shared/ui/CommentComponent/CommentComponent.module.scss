@@ -1,0 +1,19 @@
+.wrapper {
+  :global {
+    .MuiInput-root {
+      border-radius: 2px;
+      border: 1px solid grey;
+    }
+    .fa-question {
+      margin: 0 10px;
+    }
+     display: flex;
+     align-items: center;
+  }
+
+  margin-top: 20px;
+
+  span {
+    margin-right: 10px;
+  }
+}

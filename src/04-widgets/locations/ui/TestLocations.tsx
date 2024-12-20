@@ -1,24 +1,17 @@
-import React from "react";
 import {observer} from "mobx-react-lite";
 import {TestLocationsList} from "06-entities/locations";
+import {AddTestLocation} from "05-features/location/add-test-location";
+import {SendTestLocationData} from "05-features/location/send-test-location-data";
+
+import s from './TestLocations.module.scss';
 
 export const TestLocations = observer( () => {
 
     return (
-        <div>
-            <TestLocationsList/>
-            <button
-                onClick={() => {
-                }}
-            >
-                Добавить тестовую локацию
-            </button>
-            <button
-                onClick={() => {
-                }}
-            >
-                Вывести результат в консоль
-            </button>
+        <div className={s.wrapper}>
+            <TestLocationsList />
+            <AddTestLocation />
+            <SendTestLocationData />
         </div>
     );
 })

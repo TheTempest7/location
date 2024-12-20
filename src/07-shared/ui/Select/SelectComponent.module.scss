@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  p {
+    margin-right: 10px;
+  }
+
+  :global {
+    .fa-location-dot {
+      margin-right: 10px;
+    }
+    .MuiSelect-root {
+    }
+    .MuiSelect-select  {
+    }
+  }
+
+}
+
+.select {
+  height: 30px;
+}
+
+.option {
+  margin-left: 10px;
+}
