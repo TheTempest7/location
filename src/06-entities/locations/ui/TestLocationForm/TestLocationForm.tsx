@@ -20,7 +20,6 @@ interface ITestLocationFormProps {
 
 export const TestLocationForm = memo(
     ({locationData, locations, envs, changeTestLocation, deleteTestLocation}: ITestLocationFormProps) => {
-        console.log('TestLocationForm')
 
     const onSelectChangeHandler = useCallback( (val:ISelectNewValue) => {
         changeTestLocation({
@@ -84,9 +83,7 @@ export const TestLocationForm = memo(
             <div className={s.serversWrapper}>
                 <span>Серверы</span>
                 <i className="fa-solid fa-server"></i>
-                {locationData?.servers?.map((server: string, index:number) => {
-                    return (<span key={index}>{server}</span>)
-                })}
+                <span>{locationData.servers.join(',')}</span>
             </div>
             <CommentComponent
                 value={locationData.hint}
