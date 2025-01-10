@@ -12,7 +12,7 @@ export const TestLocationsList =observer( () => {
     const envsItems = useMemo(()=> toJS(sliceLocation.envs),[sliceLocation.envs])
 
     return (
-        <>
+        <div>
             { toJS(sliceLocation.testLocations).map((location) => (
                 <TestLocationForm
                     key={location.id}
@@ -23,6 +23,6 @@ export const TestLocationsList =observer( () => {
                     deleteTestLocation={sliceLocation.deleteTestLocation.bind(sliceLocation)}
                 />
             ))}
-        </>
+        </div>
     )
 })

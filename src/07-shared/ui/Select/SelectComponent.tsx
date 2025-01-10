@@ -1,4 +1,4 @@
-import {memo, useEffect, useState} from "react";
+import {memo} from "react";
 import {MenuItem, Select} from "@mui/material";
 import {ISelectItem} from "07-shared/types/common";
 import {convertSelectData} from "./lib/utils";
@@ -10,11 +10,10 @@ import s from './SelectComponent.module.scss';
 
 export const SelectComponent = memo(
     ({value,items, onChange, id, inscription ,className = ''}: ISelectComponent) => {
-    const [currentVal, setCurrentValue] = useState(value);
 
-    useEffect(() => {
-        setCurrentValue(value)
-    }, [value]);
+        if(!items.length) {
+            return  null
+        }
 
     return (
         <div className={s.wrapper+' '+ className}>
@@ -22,8 +21,8 @@ export const SelectComponent = memo(
             <Select
                 className={s.select}
                 id={id}
-                name={currentVal.name}
-                value={currentVal.value.toString()}
+                name={value.name}
+                value={value.value}
                 onChange={(e)=> {
                     onChange(convertSelectData({value: e.target,id, items}))
                 }}
@@ -38,4 +37,3 @@ export const SelectComponent = memo(
         </div>)
 })
 
-console.warn = () => {};

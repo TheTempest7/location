@@ -19,7 +19,9 @@ interface ITestLocationFormProps {
 }
 
 export const TestLocationForm = memo(
-    ({locationData, locations, envs, changeTestLocation, deleteTestLocation}: ITestLocationFormProps) => {
+    ({locationData, locations, envs,
+         changeTestLocation, deleteTestLocation
+    }: ITestLocationFormProps) => {
 
     const onSelectChangeHandler = useCallback( (val:ISelectNewValue) => {
         changeTestLocation({
@@ -30,7 +32,7 @@ export const TestLocationForm = memo(
                 value:val.value
             }
         })
-    },[changeTestLocation, locationData.id])
+    },[])
 
     const onCommentChangeHandler = useCallback( (e:ChangeEvent<HTMLInputElement>) => {
         changeTestLocation({
@@ -38,7 +40,7 @@ export const TestLocationForm = memo(
             property: 'hint',
             value: e.target.value
         })
-    },[changeTestLocation, locationData.id])
+    },[])
 
     const onDeleteHandler = () => {
         deleteTestLocation(locationData.id);

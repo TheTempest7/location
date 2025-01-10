@@ -8,7 +8,7 @@ export const convertDataToSelect = (arr:IDataToSelect[], property: string): ISel
     return arr.map((item)=> {
         return {
             name: item.name,
-            value: item[property]
+            value: item[property].toString()
         }
     });
 }
