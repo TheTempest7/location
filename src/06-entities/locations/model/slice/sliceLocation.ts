@@ -21,9 +21,9 @@ export class SliceLocation {
     id: uuidv4(),
     location: {
       name: 'testenter.ru_01',
-      value: 1
+      value: '1'
     },
-    env: {name:'Test_192.168.220.157',value: 1},
+    env: {name:'Test_192.168.220.157',value: '1'},
     servers: ['MPTEST41', 'MPTEST42'],
     hint: 'first',
   }
@@ -41,15 +41,8 @@ export class SliceLocation {
   };
 
   changeTestLocationData({id,property,value}:IChangeTestLocationData){
-    this.testLocations = this.testLocations.map((testLocation)=> {
-      if(testLocation.id===id) {
-        return {
-          ...testLocation,
-          [property]: value
-        }
-      }
-      return testLocation
-    })
+    const index = this.testLocations.findIndex((testLocation)=> testLocation.id===id)
+    this.testLocations[index] = {...this.testLocations[index],[property]: value }
   };
 
   addTestLocation() {
@@ -58,9 +51,9 @@ export class SliceLocation {
       id: uuidv4(),
       location: {
         name: 'testenter.ru_01',
-        value: 1
+        value: '1'
       },
-      env: {name:'Test_192.168.220.157',value: 1},
+      env: {name:'Test_192.168.220.157',value: '1'},
       servers: this.servers.map((server)=> server.name),
           hint: '',
     })
